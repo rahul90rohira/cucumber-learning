@@ -2,10 +2,12 @@ package stepDefinations;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
+import org.testng.annotations.Test;
 
 import java.util.Collections;
 import java.util.List;
 
+@Test(enabled = false)
 public class stepDefination {
 
     @Given("^Chrome browser is installed in system$")
