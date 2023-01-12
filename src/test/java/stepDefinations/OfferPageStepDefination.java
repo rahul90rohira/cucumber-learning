@@ -1,12 +1,9 @@
 package stepDefinations;
 
 import io.cucumber.java.en.Then;
-import org.openqa.selenium.By;
 import org.testng.Assert;
+import pageObjects.OfferPage;
 import utils.TestContextSetup;
-
-import java.util.Iterator;
-import java.util.Set;
 
 public class OfferPageStepDefination {
     TestContextSetup testContextSetup;
@@ -22,15 +19,13 @@ public class OfferPageStepDefination {
     @Then("user search for same shortname {string} in offers page to check if product exist")
     public void user_search_for_same_shortname_in_offers_page_to_check_if_product_exist(String shortName) throws InterruptedException {
         // Write code here that turns the phrase above into concrete actions
-        testContextSetup.driver.findElement(By.linkText("Top Deals")).click();
-        Set<String> windows = testContextSetup.driver.getWindowHandles();
-        Iterator<String> i1 = windows.iterator();
-        String parentWindow = i1.next();
-        String childWindow = i1.next();
-        testContextSetup.driver.switchTo().window(childWindow);
-        testContextSetup.driver.findElement(By.xpath("//input[@id='search-field']")).sendKeys(shortName);
+        OfferPage offerPage=testContextSetup.pageObjectManager.getOfferPage();
+//        OfferPage offerJava =new OfferPage(testContextSetup.driver);
+
+        offerPage.switchToDealPage();
+        offerPage.enterText(shortName);
         Thread.sleep(2000);
-        String offerPageProductName = testContextSetup.driver.findElement(By.cssSelector("td:nth-of-type(1)")).getText();
+        String offerPageProductName= offerPage.getSearchText();
     }
 
     @Then("verify product name in offers page matches with landing page")
@@ -39,4 +34,6 @@ public class OfferPageStepDefination {
             Assert.assertEquals(testContextSetup.landingPageProductName, offerPageProductName);
         }
     }
+
+
 }
