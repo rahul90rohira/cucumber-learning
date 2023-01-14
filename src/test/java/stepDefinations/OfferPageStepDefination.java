@@ -9,9 +9,8 @@ public class OfferPageStepDefination {
     TestContextSetup testContextSetup;
     String offerPageProductName;
 
-    public OfferPageStepDefination(TestContextSetup testContextSetup)
-    {
-        this.testContextSetup=testContextSetup;
+    public OfferPageStepDefination(TestContextSetup testContextSetup) {
+        this.testContextSetup = testContextSetup;
 
     }
 
@@ -19,13 +18,14 @@ public class OfferPageStepDefination {
     @Then("user search for same shortname {string} in offers page to check if product exist")
     public void user_search_for_same_shortname_in_offers_page_to_check_if_product_exist(String shortName) throws InterruptedException {
         // Write code here that turns the phrase above into concrete actions
-        OfferPage offerPage=testContextSetup.pageObjectManager.getOfferPage();
+        OfferPage offerPage = testContextSetup.pageObjectManager.getOfferPage();
 //        OfferPage offerJava =new OfferPage(testContextSetup.driver);
 
+//        testContextSetup.generalUtils.
         offerPage.switchToDealPage();
         offerPage.enterText(shortName);
         Thread.sleep(2000);
-        String offerPageProductName= offerPage.getSearchText();
+        String offerPageProductName = offerPage.getSearchText();
     }
 
     @Then("verify product name in offers page matches with landing page")

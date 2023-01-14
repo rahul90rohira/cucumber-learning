@@ -27,17 +27,18 @@ public class LandingPageStepDefination {
 
     @Given("User is on landing page")
     public void user_is_on_landing_page() {
-        // Write code here that turns the phrase above into concrete actions
-        testContextSetup.driver = WebDriverManager.chromedriver().create();
-        testContextSetup.driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
+        // Write code here that turns the phrase above intso concrete actions
+//        testContextSetup.driver = WebDriverManager.chromedriver().create();
+       String url= testContextSetup.configFileReader.getUrl();
+        testContextSetup.driver.get(url);
 
     }
 
     @When("User search the vegetable with short name {string} and extracted actual name of product")
     public void user_search_the_vegetable_with_short_name_and_extracted_actual_name_of_product(String shortname) throws InterruptedException {
         // Write code here that turns the phrase above into concrete actions
+
         LandingPage landingPage=testContextSetup.pageObjectManager.getLandingPage();
-//        LandingPage landingPage= new LandingPage(testContextSetup.driver);
         landingPage.enterSearchItems(shortname);
         Thread.sleep(2000);
         landingPageProductName = landingPage.getSearchText();

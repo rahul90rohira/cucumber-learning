@@ -5,21 +5,29 @@ package stepDefinations;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.testng.annotations.Test;
+import utils.TestContextSetup;
 
 import java.sql.SQLOutput;
 
-@Test(enabled = false)
+
 public class hooks {
 
-    @Before("@SmokeTest")
-    public void setup()
+    TestContextSetup testContextSetup;
+    public  hooks(TestContextSetup testContextSetup)
     {
-        System.out.println("before hooks");
+        this.testContextSetup=testContextSetup;
     }
 
-    @After("@SmokeTest")
+//    @Before
+//    public void setup()
+//    {
+//        System.out.println("before hooks");
+//    }
+
+    @After
     public void cleanup()
     {
-        System.out.println("After hooks");
+        this.testContextSetup.driverManager.getDriver().quit();
+
     }
 }
